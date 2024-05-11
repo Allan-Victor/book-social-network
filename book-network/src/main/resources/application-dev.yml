@@ -1,9 +1,15 @@
+server:
+  port: 8088
+
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/book_social_network
-    username: username
-    password: password
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/books
+    username: postgres
+    password: postgres
+
+  output:
+    ansi:
+      enabled: ALWAYS
 
   jpa:
     hibernate:
@@ -12,7 +18,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
   mail:
@@ -36,3 +41,6 @@ application:
     jwt:
       secret-key: d856e8cc6782427094b5294523b3ab03aabe8a5f032cacb0cec559fd17853d26b19e0f991769f9acd2aa9485d8de0abcc799000c25c731a1983418f6fe63bd30
       expiration: 8640000
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-account

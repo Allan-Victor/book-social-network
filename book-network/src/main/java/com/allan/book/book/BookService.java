@@ -2,6 +2,7 @@ package com.allan.book.book;
 
 import com.allan.book.common.PageResponse;
 import com.allan.book.exception.OperationNotPermittedException;
+import com.allan.book.file.FileStorageService;
 import com.allan.book.history.BookTransactionHistory;
 import com.allan.book.user.User;
 import jakarta.persistence.EntityNotFoundException;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +25,7 @@ public class BookService {
     private final BookMapper bookMapper;
     private final BookRepository bookRepository;
     private final BookTransactionHistoryRepository transactionHistoryRepository;
+    private final FileStorageService fileStorageService;
     public Integer save(BookRequest request, Authentication connectedUser) {
         User user = (User) connectedUser.getPrincipal();
         Book book = bookMapper.toBook(request);
@@ -203,5 +206,16 @@ public class BookService {
                 .orElseThrow(() -> new OperationNotPermittedException("you can't approve because the book is not yet returned"));
         bookTransactionHistory.setReturnApproved(true);
         return transactionHistoryRepository.save(bookTransactionHistory).getTransactionId();
+    }
+
+    public void uploadBookCoverPicture(MultipartFile file, Authentication connectedUser, Integer bookId) {
+        // Check if book is available
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(()-> new EntityNotFoundException("No book found with the ID " +bookId));
+        User user = (User) connectedUser.getPrincipal();
+        var bookCover = fileStorageService.saveFile(file, user.getId());
+        book.setBookCover(bookCover);
+        bookRepository.save(book);
+
     }
 }

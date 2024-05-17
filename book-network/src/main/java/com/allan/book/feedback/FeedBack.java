@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Feedback extends BaseEntity {
+public class FeedBack extends BaseEntity {
 
     @Id
     @SequenceGenerator(name = "feedback_seq",
@@ -22,7 +22,7 @@ public class Feedback extends BaseEntity {
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "feedback_seq")
-    private Integer feedbackId;
+    private Integer feedBackId;
     private Double note;
     private String comment;
 

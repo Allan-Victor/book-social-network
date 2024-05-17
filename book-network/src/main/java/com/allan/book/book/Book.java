@@ -1,7 +1,7 @@
 package com.allan.book.book;
 
 import com.allan.book.common.BaseEntity;
-import com.allan.book.feedback.Feedback;
+import com.allan.book.feedback.FeedBack;
 import com.allan.book.history.BookTransactionHistory;
 import com.allan.book.user.User;
 import jakarta.persistence.*;
@@ -40,7 +40,7 @@ public class Book extends BaseEntity {
     private User owner;
 
     @OneToMany(mappedBy = "book")
-    private List<Feedback> feedbacks;
+    private List<FeedBack> feedbacks;
 
     @OneToMany(mappedBy = "book")
     private List<BookTransactionHistory> histories;
@@ -51,7 +51,7 @@ public class Book extends BaseEntity {
             return 0.0;
         }
         var rate = this.feedbacks.stream()
-                .mapToDouble(Feedback::getNote)
+                .mapToDouble(FeedBack::getNote)
                 .average()
                 .orElse(0.0);
         double roundedRate = Math.round(rate * 10.0) / 10.0;

@@ -4,14 +4,13 @@ import com.allan.book.book.Book;
 import com.allan.book.common.BaseEntity;
 import com.allan.book.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @SuperBuilder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookTransactionHistory extends BaseEntity {

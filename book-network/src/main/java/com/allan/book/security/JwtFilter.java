@@ -19,7 +19,7 @@ import java.io.IOException;
 import static org.springframework.http.HttpHeaders.*;
 
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 

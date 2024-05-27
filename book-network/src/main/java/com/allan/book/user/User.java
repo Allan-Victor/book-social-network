@@ -21,10 +21,10 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+//@Entity
 @Builder
-@Table(name = "_user")
-@EntityListeners(AuditingEntityListener.class)
+//@Table(name = "_user")
+//@EntityListeners(AuditingEntityListener.class)
 public class User implements UserDetails, Principal {
 
     @Id

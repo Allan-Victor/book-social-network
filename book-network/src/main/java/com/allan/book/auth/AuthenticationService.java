@@ -9,7 +9,6 @@ import com.allan.book.user.TokenRepository;
 import com.allan.book.user.User;
 import com.allan.book.user.UserRepository;
 import jakarta.mail.MessagingException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,10 +22,10 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final RoleRepository roleRepository;
+    /*private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
@@ -122,5 +121,5 @@ public class AuthenticationService {
         userRepository.save(user);
         savedToken.setValidatedAt(LocalDateTime.now());
         tokenRepository.save(savedToken);
-    }
+    }*/
 }

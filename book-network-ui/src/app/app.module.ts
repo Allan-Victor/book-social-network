@@ -1,21 +1,44 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { LoginComponent } from './pages/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { RegisterComponent } from './pages/register/register.component';
+import { ActivateAccountComponent } from './pages/activate-account/activate-account.component';
+import { CodeInputModule } from 'angular-code-input';
+import { TokenService } from './services/token/token.service';
+import { httpTokenInterceptor } from './services/interceptor/httpTokenInterceptor';
+import { KeycloakService } from './services/keycloak/keycloak.service';
 
+export function kcFactory(kcService: KeycloakService){
+  return () => kcService.init();
+}
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    ActivateAccountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    CodeInputModule,
   ],
   providers: [
-    HttpClient
+    provideHttpClient(withInterceptors([httpTokenInterceptor])),  
+
+    {
+      provide:APP_INITIALIZER,
+      deps: [KeycloakService],
+      useFactory: kcFactory,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent]
 })

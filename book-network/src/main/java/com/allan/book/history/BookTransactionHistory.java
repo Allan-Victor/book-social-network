@@ -24,9 +24,12 @@ public class BookTransactionHistory extends BaseEntity {
     private Integer transactionId;
 
     // User relationship
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
+
+    @Column(name = "user_id")
+    private String userId;
 
     // Book relationship
     @ManyToOne

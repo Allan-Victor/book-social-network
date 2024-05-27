@@ -12,13 +12,13 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EnableAsync
-public class BookNetworkApiApplication {
-
+public class BookNetworkApiApplication { 
+ 
 	public static void main(String[] args) {
 		SpringApplication.run(BookNetworkApiApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner runner(RoleRepository roleRepository){
 		return args -> {
 			if (roleRepository.findByName("USER").isEmpty()){
@@ -29,7 +29,7 @@ public class BookNetworkApiApplication {
 				);
 			}
 		};
-	}
+	}*/
 
 
 }
